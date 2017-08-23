@@ -1,6 +1,9 @@
 var Myplots = function(p) {
 	// Global variables
 	var plot2, plot1, plot3, i, index;
+	var points2 = [];
+	var points1 = [];
+	var points3 = [];
 
 	// Load the image before the sketch is run
 	p.preload = function() {
@@ -69,17 +72,34 @@ var Myplots = function(p) {
 		// 	plot2.setPoints([]);
 		// }
 		p.background(255);
-		var zaman = float(time_chart.elt.textContent);
+		var k = 500
+		var zaman = int(time_chart.elt.textContent);
+		points2 = [];
+		points1 = [];
+		points3 = [];
 
-		// Add a new point to the second plot if the mouse moves significantly
-		
-		if (plot2.getPoints().length > 1000){
+		if (zaman <1){
 			plot2.setPoints([]);
 			plot1.setPoints([]);
 			plot3.setPoints([]);
+		} else {
+			points2 = plot2.getPoints();
+			points1 = plot1.getPoints();
+			points3 = plot3.getPoints();
+		};
+		
+		if (plot2.getPoints().length > k){
+			points2 = subset(points2, 1);
+			points1 = subset(points1, 1);
+			points3 = subset(points3, 1);
 			
 		};
-		var points2 = plot2.getPoints();
+		// Add a new point to the second plot if the mouse moves significantly
+
+  
+        
+		
+
 		var torque = float(t_chart.elt.textContent);
 		// console.log(t);
 		points2.push(new GPoint(zaman, torque));
@@ -96,7 +116,7 @@ var Myplots = function(p) {
 		// plot2.drawPoints(star);
 		plot2.endDraw();
 
-		var points1 = plot1.getPoints();
+		
 		var V = float(v_chart.elt.textContent);
 		// console.log(t);
 		points1.push(new GPoint(zaman, V));
@@ -112,7 +132,7 @@ var Myplots = function(p) {
 		plot1.drawLines();
 		plot1.endDraw();
 
-		var points3 = plot3.getPoints();
+		
 		var A = float(theta_chart.elt.textContent);
 		// console.log(t);
 		points3.push(new GPoint(zaman, A));

@@ -49,8 +49,10 @@ function MagnetisPole(polarity,location) {
 				if (this.polarity > 0) {
 					fill(0,0,255);
 				}
-					else {
+					else if (this.polarity < 0){
 						fill(255,0,255);
+					} else {
+						fill(255,255,0)
 					}
 				ellipse(this.location.x, this.location.y, 2*this.size,2*this.size)
 			  }
