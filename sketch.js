@@ -25,7 +25,7 @@ var DrivenDiscInertia = 2000000;
 
 function setup() {
 	yCenter = 200+ max(DrivenDiscRadius, MotorDiscRadius);
-	ourCanvas = createCanvas(2*DrivenDiscRadius+2*MotorDiscRadius+300+500, 2*yCenter);
+	ourCanvas = createCanvas(1200, 800);
 
 	// the new canvas to contain gui without quicksettings.js reference problems
 	makeOurgui();
