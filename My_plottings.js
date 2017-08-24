@@ -18,7 +18,7 @@ var Myplots = function(p) {
 		var canvas = p.createCanvas(w, h+100);
 
 
-		
+
 		// Leave empty the points for the second plot. We will fill them in draw()
 		var points2 = [];
 		// Setup for the second plot
@@ -73,7 +73,7 @@ var Myplots = function(p) {
 		// }
 		p.background(255);
 		var k = 500
-		var zaman = int(time_chart.elt.textContent);
+		var zaman = time_chart;
 		points2 = [];
 		points1 = [];
 		points3 = [];
@@ -87,20 +87,20 @@ var Myplots = function(p) {
 			points1 = plot1.getPoints();
 			points3 = plot3.getPoints();
 		};
-		
+
 		if (plot2.getPoints().length > k){
 			points2 = subset(points2, 1);
 			points1 = subset(points1, 1);
 			points3 = subset(points3, 1);
-			
+
 		};
 		// Add a new point to the second plot if the mouse moves significantly
 
-  
-        
-		
 
-		var torque = float(t_chart.elt.textContent);
+
+
+
+		var torque = t_chart;
 		// console.log(t);
 		points2.push(new GPoint(zaman, torque));
 		plot2.setPoints(points2);
@@ -116,8 +116,8 @@ var Myplots = function(p) {
 		// plot2.drawPoints(star);
 		plot2.endDraw();
 
-		
-		var V = float(v_chart.elt.textContent);
+
+		var V = v_chart;
 		// console.log(t);
 		points1.push(new GPoint(zaman, V));
 		plot1.setPoints(points1);
@@ -132,8 +132,8 @@ var Myplots = function(p) {
 		plot1.drawLines();
 		plot1.endDraw();
 
-		
-		var A = float(theta_chart.elt.textContent);
+
+		var A = theta_chart;
 		// console.log(t);
 		points3.push(new GPoint(zaman, A));
 		plot3.setPoints(points3);

@@ -30,15 +30,15 @@ function setup() {
 	// the new canvas to contain gui without quicksettings.js reference problems
 	makeOurgui();
 
-	t_chart = createP();
-	v_chart = createP();
-	theta_chart = createP();
-	time_chart = createP();
-	t_chart.hide();
-	v_chart.hide();
-	theta_chart.hide();
-	time_chart.position(400, 500);
-    time_chart.hide();
+	// t_chart = createP();
+	// v_chart = createP();
+	// theta_chart = createP();
+	// time_chart = createP();
+	// t_chart.hide();
+	// v_chart.hide();
+	// theta_chart.hide();
+	// time_chart.position(400, 500);
+    // time_chart.hide();
 	initiateSystem();
 }
 
@@ -47,10 +47,10 @@ function setup() {
 function draw() {
 	//console.log(frameRate());
 	discs[1].momentCalc(discs[0].discMagnets);
-	time_chart.html(time);
-	t_chart.html(discs[1].moment);
-	v_chart.html(discs[1].vel);
-	theta_chart.html((discs[1].discAngle));
+	time_chart = time;
+	t_chart = discs[1].moment;
+	v_chart = discs[1].vel;
+	theta_chart = discs[1].discAngle;
 	// t_chart.value(discs[1].moment);
 	background(255);
 	for (var i = 0; i < discs.length; i++) {
@@ -105,7 +105,7 @@ function initiateSystem() {
 	discs[1].DrawDisc();
 
 	time = 0
-	time_chart.html(time);
+	time_chart = time;
 	// if (p5Sketch) {
 	// 	p5Sketch.remove();
 	// };
@@ -136,7 +136,7 @@ function makeOurgui() {
 		var ref2;
 
 		sketch.setup = function () {
-			var g = createGui('System Parameters');
+			var g = createGui('Double Click here to minimize');
 			sliderRange(0, 25, 1);
 			g.addGlobals('MotorDiscMagnetsNumber');
 			sliderRange(0, 1, 0.01);
@@ -172,6 +172,7 @@ function makeOurgui() {
 				if (ref[i] != ref2[i] ){
 					ref = ref2;
 					initiateSystem();
+					break;
 
 				};
 			};
