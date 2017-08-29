@@ -2,7 +2,7 @@ const k = 500;
 var plots =[];
 var points = [[],[],[],[],[]];
 const pltsQ = 5;
-const labels = ["Torque","Relative angular velocity","Angular Position (DEGREE)","Relative angular momentum (Iw)","Relative rotational energy (Iw2)"];
+const labels = ["Torque","Relative angular velocity (w)","Angular Position (DEGREE)","Relative angular momentum (Iw)","Relative rotational energy (Iw2)"];
 var values = [t_chart, v_chart, theta_chart,Momentum_chart, Energy_Chart ];
 var v,A;
 var Myplots = function(p) {
@@ -34,6 +34,7 @@ var Myplots = function(p) {
 		plots[i].activateCentering();
 	}
 		plots[0].getTitle().setText("values vs time(steps)");
+        plots[pltsQ-1].getXAxis().getAxisLabel().setText("steps");
 		// Leave empty the points for the second plot. We will fill them in draw()
 };
 
