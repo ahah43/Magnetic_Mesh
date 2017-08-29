@@ -1,5 +1,5 @@
 var discs = [];
-var t_chart, v_chart, theta_chart, time_chart;
+var t_chart, v_chart, theta_chart, time_chart, Momentum_chart,Energy_Chart ;
 var time;
 var x;
 var yCenter;
@@ -10,7 +10,8 @@ var MotorDiscSpeed = 0.2;
 var MotordiscAngleDegress = 0;
 var MotorDiscMagnetsStrength = 1000;
 var MotorDiscRadius = 100;
-var seperator = '#00ddff';
+var MotorDiscInertia = 2000000;
+// var seperator = '#00ddff';
 // driven Disc Parameters
 var DistanceBetweenDiscsCenters = 300;
 var DrivenDiscRadius = 100;
@@ -52,6 +53,8 @@ function draw() {
 	time_chart = time;
 	t_chart = discs[1].moment;
 	v_chart = discs[1].vel;
+	Momentum_chart = (discs[1].vel*discs[1].Inertia) / (discs[0].vel*discs[0].Inertia);
+	Energy_Chart = (0.5*discs[1].Inertia*discs[1].vel**2) / (0.5*discs[0].Inertia*discs[0].vel**2);
 	theta_chart = discs[1].discAngle;
 	// t_chart.value(discs[1].moment);
 	background(255);
@@ -79,6 +82,7 @@ function initiateSystem() {
 	ourCanvas.resize(wii, 2*yCenter);
 	var p = MotorDiscMagnetsStrength;
 	discs[0] = new roatingDisc();
+	discs[0].Inertia = MotorDiscInertia;
 	discs[0].center = createVector(MotorDiscRadius+200, yCenter);
 	discs[0].discAngle = MotordiscAngleDegress*PI/180;
 	discs[0].ForcedSpeed = MotorDiscSpeed * TWO_PI / 25;
@@ -134,7 +138,7 @@ function runSketch(sketch) {
 
 function makeOurgui() {
 	x = new p5(function (sketch) {
-		var ref = [MotorDiscMagnetsNumber, MotorDiscSpeed, MotordiscAngleDegress, MotorDiscMagnetsStrength,MotorDiscRadius,
+		var ref = [MotorDiscMagnetsNumber, MotorDiscSpeed, MotordiscAngleDegress, MotorDiscMagnetsStrength,MotorDiscRadius,MotorDiscInertia,
 			DistanceBetweenDiscsCenters, DrivenDiscRadius, DrivenDiscMagnetsNumber,DrivenDiscAngleDegress,
 			DrivenDiscMagnetsStrength,DrivenDiscInertia];
 		var ref2;
@@ -151,6 +155,9 @@ function makeOurgui() {
 			g.addGlobals('MotorDiscMagnetsStrength');
 			sliderRange(0, 600, 5);
 			g.addGlobals('MotorDiscRadius');
+			sliderRange(0, 20000000, 1000);
+			g.addGlobals('MotorDiscInertia');
+			
 			// sliderRange(0, 10, 1);
 			// g.addGlobals('seperator');
 			sliderRange(0, 1000, 1);
@@ -169,7 +176,7 @@ function makeOurgui() {
 
 		};
 		sketch.draw = function () {
-			ref2 = [MotorDiscMagnetsNumber, MotorDiscSpeed, MotordiscAngleDegress, MotorDiscMagnetsStrength,MotorDiscRadius,
+			ref2 = [MotorDiscMagnetsNumber, MotorDiscSpeed, MotordiscAngleDegress, MotorDiscMagnetsStrength,MotorDiscRadius,MotorDiscInertia,
 				DistanceBetweenDiscsCenters, DrivenDiscRadius, DrivenDiscMagnetsNumber,DrivenDiscAngleDegress,
 				DrivenDiscMagnetsStrength,DrivenDiscInertia];
 			for (var i =0; i< ref.length;i++){

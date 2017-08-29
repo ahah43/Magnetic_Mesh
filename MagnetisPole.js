@@ -13,7 +13,7 @@ function MagnetisPole(polarity,location) {
 	}
 	this.forcecomponents = function(mg2){
 		var f = this.force(mg2);
-		if(f == 0){return createVector(0,0,0)};
+		if(f == 0){return createVector(0, 0,0)};
 		var p2 = mg2.location;
 		var p1 = this.location;
 		if(f > 0){

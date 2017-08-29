@@ -35,9 +35,14 @@ function roatingDisc() {
   }
   this.updateposition = function () {
     this.acc = this.moment / this.Inertia;
-    this.vel += this.acc;
+    
     // console.log(this.vel);
-    var ss = this.discAngle + (this.ForcedSpeed + this.vel);  
+    if (this.ForcedSpeed == 0){
+      this.vel += this.acc;
+    }else {
+      this.vel = this.ForcedSpeed;
+    };
+    var ss = this.discAngle + this.vel; 
     this.acc = 0;
     this.moment = 0;
     this.discAngle = ss - TWO_PI * Math.floor(ss / TWO_PI);
